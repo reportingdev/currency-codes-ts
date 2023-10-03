@@ -1,23 +1,25 @@
+import {CurrencyCode, Country} from './types';
+
 declare module "currency-codes" {
   export interface CurrencyCodeRecord {
-    code: string;
+    code: CurrencyCode;
     number: string;
     digits: number;
     currency: string;
-    countries: string[];
+    countries: Country[];
   }
 
   export function code(code: string): CurrencyCodeRecord | undefined;
 
-  export function country(country: string): CurrencyCodeRecord[];
+  export function country(country: Country): CurrencyCodeRecord[];
 
   export function number(number: string): CurrencyCodeRecord | undefined;
 
-  export function codes(): string[];
+  export function codes(): CurrencyCode[];
 
   export function numbers(): number[];
 
-  export function countries(): string[];
+  export function countries(): Country[];
 
   export const publishDate: string;
 

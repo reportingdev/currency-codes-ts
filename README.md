@@ -2,7 +2,7 @@
 
 A node.js module to list and work on currency codes based on the [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) standard.
 
-	npm install currency-codes
+	npm install @reportingdev/currency-codes
 
 ## code('EUR')
 
@@ -166,7 +166,7 @@ $ npm run iso
 > currency-codes@1.5.1 iso:fetch-xml currency-codes
 > node scripts/fetch-iso-4217-xml.js
 
-Downloaded https://www.currency-iso.org/dam/downloads/lists/list_one.xml to iso-4217-list-one.xml
+Downloaded https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml to iso-4217-list-one.xml
 
 > currency-codes@1.5.1 iso:ingest-xml currency-codes
 > node scripts/ingest-iso-4217-xml.js

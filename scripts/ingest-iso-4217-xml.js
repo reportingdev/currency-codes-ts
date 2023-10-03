@@ -6,6 +6,8 @@ require('@gouch/to-title-case');
 const input = 'iso-4217-list-one.xml';
 const outputDataFile = 'data.js';
 const outputPublishDateFile = 'iso-4217-publish-date.js';
+const outputTypesFile = 'types.ts';
+
 
 function ingestEntry(entry) {
   return {
@@ -68,6 +70,19 @@ fs.readFile(input, function(err, data) {
       const publishDate = ingestPublishDate(result);
       const countries = ingestEntries(result);
 
+      // Prepare content for CurrencyCode type
+      const currencyCodes = countries.map(c => `'${c.code}'`).join(' | ');
+
+      // Prepare content for Country type
+      const countryNames = [...new Set(countries.flatMap(c => c.countries))]
+        .map(country => `'${country}'`)
+        .join(' | ');
+
+      const typesContent = `// Types generated based on ISO 4217 currency codes and countries
+      export type CurrencyCode = ${currencyCodes};
+      export type Country = ${countryNames};
+      `;
+
       const preamble = '/*\n' +
         '\tFollows ISO 4217, https://www.iso.org/iso-4217-currency-codes.html\n' +
         '\tSee https://www.currency-iso.org/dam/downloads/lists/list_one.xml\n' +
@@ -90,6 +105,13 @@ fs.readFile(input, function(err, data) {
         failOnError(err);
 
         console.log('Wrote publish date to ' + outputPublishDateFile);
+      });
+
+      // Write the types to types.ts
+      fs.writeFile(outputTypesFile, typesContent, function(err) {
+        failOnError(err);
+
+        console.log('Wrote TypeScript types to ' + outputTypesFile);
       });
   });
 });

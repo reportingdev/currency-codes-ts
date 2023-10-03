@@ -1,9 +1,9 @@
 {
-  "name": "currency-codes",
+  "name": "@reportingdev/currency-codes",
   "types": "index.d.ts",
   "version": "2.1.0",
-  "description": "Lookup currency codes based on ISO 4217",
-  "repository": "git://github.com/freeall/currency-codes.git",
+  "description": "Lookup currency codes based on ISO 4217 with TypeScript support.",
+  "repository": "git://github.com/reporting-dev/currency-codes.git",
   "keywords": [
     "iso4217",
     "iso",
