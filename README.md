@@ -2,7 +2,7 @@
 
 A TypeScript library for ISO 4217 currency codes. Efficiently lookup and validate currency codes, retrieve associated countries, and more.
 
-This library is inspired by and originally forked from [currency-codes](https://github.com/smirzaei/currency-codes). This version adds TypeScript support and will be periodically updated with the latest currency data.
+This library is inspired by and originally forked from [currency-codes](https://github.com/freeall/currency-codes). This version adds TypeScript support and will be periodically updated with the latest currency data.
 
 ## Installation
 
@@ -20,7 +20,7 @@ Here's how you can use the library:
 import { codes } from 'currency-codes-ts';
 
 // get currency details
-const euroInfo: CurrencyCodeRecord = currencyCodes.code('EUR');
+const euroInfo: CurrencyCodeRecord = codes('EUR');
 console.log(euroInfo);  
 
 /*
@@ -49,7 +49,7 @@ console.log(euroInfo);
 ```typescript
 import { number } from 'currency-codes-ts';
 
-console.log(number(967))
+console.log(number(967));
 
 /*
   {
@@ -67,7 +67,7 @@ console.log(number(967))
 ```typescript
 import { country } from 'currency-codes-ts';
 
-console.log(country('Columbia'))
+console.log(country('Columbia'));
 
 /*
   [
@@ -94,7 +94,7 @@ console.log(country('Columbia'))
 ```typescript
 import { codes } from 'currency-codes-ts';
 
-console.log(codes())
+console.log(codes());
 
 /*
   [
@@ -112,7 +112,7 @@ console.log(codes())
 ```typescript
 import { numbers } from 'currency-codes-ts';
 
-console.log(numbers())
+console.log(numbers());
 
 /*
 [
@@ -130,7 +130,7 @@ console.log(numbers())
 ```typescript
 import { countries } from 'currency-codes-ts';
 
-console.log(countries())
+console.log(countries());
 
 /*
 [ 
@@ -146,7 +146,7 @@ console.log(countries())
 ```typescript
 import { data } from 'currency-codes-ts';
 
-console.log(data)
+console.log(data);
 
 /*
 [{
