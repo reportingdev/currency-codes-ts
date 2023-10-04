@@ -5,7 +5,7 @@
   "type": "module",
 
   "main": "dist/index.js",
-  "types": "index.d.ts",
+  "types": "dist/index.d.ts",
   "repository": "git://github.com/reportingdev/currency-codes-ts.git",
   "homepage": "https://github.com/reportingdev/currency-codes-ts#readme",
   "bugs": {
