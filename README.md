@@ -1,94 +1,118 @@
-# currency-codes
+# Currency Codes TS
 
-A node.js module to list and work on currency codes based on the [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) standard.
+A TypeScript library for ISO 4217 currency codes. Efficiently lookup and validate currency codes, retrieve associated countries, and more.
 
-	npm install @reportingdev/currency-codes
+This library is inspired by and originally forked from [currency-codes](https://github.com/smirzaei/currency-codes). This version adds TypeScript support and will be periodically updated with the latest currency data.
 
-## code('EUR')
+## Installation
 
-``` js
-var cc = require('currency-codes');
-console.log(cc.code('EUR'));
+```bash
+npm install currency-codes-ts
+```
+
+## Examples
+
+Here's how you can use the library:
+
+#### Code lookup
+
+```typescript
+import { codes } from 'currency-codes-ts';
+
+// get currency details
+const euroInfo: CurrencyCodeRecord = currencyCodes.code('EUR');
+console.log(euroInfo);  
 
 /*
-{
-	code: 'EUR',
-	number: 978,
-	digits: 2,
-	currency: 'Euro',
-	countries: [
-		'andorra', 'austria', 'belgium', 'cyprus', 'estonia', 'finland',
-		'france', 'germany', 'greece', 'ireland', 'italy', 'kosovo',
-		'luxembourg', 'malta', 'monaco', 'montenegro', 'netherlands',
-		'portugal', 'san marino', 'slovakia', 'slovenia', 'spain',
-		'vatican city' ]
-}
+  {
+    code: 'EUR',
+    number: '978',
+    digits: 2,
+    currency: 'Euro',
+    countries: [
+      'Åland Islands', 'Andorra', 'Austria', 'Belgium', 'Croatia',
+      'Cyprus', 'Estonia', 'European Union', 'Finland', 'France',
+      'French Guiana', 'French Southern Territories (The)', 'Germany',
+      'Greece', 'Guadeloupe', 'Holy See (The)', 'Ireland', 'Italy',
+      'Latvia', 'Lithuania', 'Luxembourg', 'Malta', 'Martinique',
+      'Mayotte', 'Monaco', 'Montenegro', 'Netherlands (The)',
+      'Portugal', 'Réunion', 'Saint Barthélemy', 'Saint Martin (French Part)',
+      'Saint Pierre and Miquelon', 'San Marino', 'Slovakia', 'Slovenia',
+      'Spain'
+    ]
+  }
 */
 ```
 
-## number(967)
+#### Number Lookup
 
-``` js
-var cc = require('currency-codes');
-console.log(cc.number(967));
+```typescript
+import { number } from 'currency-codes-ts';
+
+console.log(number(967))
 
 /*
-{
-	code: 'ZMW',
-	number: 967,
-	digits: 2,
-	currency: 'Zambian kwacha',
-	countries: [ 'zambia' ] }
+  {
+    code: 'ZMW',
+    number: '967',
+    digits: 2,
+    currency: 'Zambian Kwacha',
+    countries: [ 'Zambia' ]
+  }
 */
 ```
 
-## country('colombia')
+#### Country Lookup
 
-``` js
-var cc = require('currency-codes');
-console.log(cc.country('colombia'));
+```typescript
+import { country } from 'currency-codes-ts';
+
+console.log(country('Columbia'))
 
 /*
-[
-	{
-		code: 'COP',
-		number: 170,
-		digits: 2,
-		currency: 'Colombian peso',
-		countries: [ 'colombia' ]
-	}, {
-		code: 'COU',
-		number: 970,
-		digits: 2,
-		currency: 'Unidad de Valor Real',
-		countries: [ 'colombia' ]
-	}
-]
+  [
+    {
+      code: 'COP',
+      number: '170',
+      digits: 2,
+      currency: 'Colombian Peso',
+      countries: [ 'Colombia' ]
+    },
+    {
+      code: 'COU',
+      number: '970',
+      digits: 2,
+      currency: 'Unidad de Valor Real',
+      countries: [ 'Colombia' ]
+    }
+  ]
 */
 ```
 
-## codes()
+#### Get all Currency Codes
 
-``` js
-var cc = require('currency-codes');
-console.log(cc.codes());
+```typescript
+import { codes } from 'currency-codes-ts';
+
+console.log(codes())
 
 /*
-[
-	'AED',
-	'AFN',
-	...
-	'ZAR',
-	'ZMW'
-]
+  [
+    'AED',
+    'AFN',
+    ...
+    'ZAR',
+    'ZMW'
+  ]
 */
 ```
 
-## numbers()
+#### Get all Currency Numbers
 
-``` js
-var cc = require('currency-codes');
-console.log(cc.numbers());
+```typescript
+import { numbers } from 'currency-codes-ts';
+
+console.log(numbers())
 
 /*
 [
@@ -101,11 +125,12 @@ console.log(cc.numbers());
 */
 ```
 
-## countries()
+#### Get all Countries
 
-``` js
-var cc = require('currency-codes');
-console.log(cc.countries());
+```typescript
+import { countries } from 'currency-codes-ts';
+
+console.log(countries())
 
 /*
 [ 
@@ -116,11 +141,12 @@ console.log(cc.countries());
 */
 ```
 
-## data
+#### Get all currency records
 
-``` js
-var data = require('currency-codes/data');
-console.log(data);
+```typescript
+import { data } from 'currency-codes-ts';
+
+console.log(data)
 
 /*
 [{
@@ -137,46 +163,61 @@ console.log(data);
 	countries: ['afghanistan']
 }, {
 	...
+}]
 */
 ```
 
-## publishDate
+## Functions
 
-```js
-var cc = require('currency-codes');
+- `code(code: string)`: Returns a `CurrencyCodeRecord` object based on ISO 4217 currency code. Returns `undefined` if not found.
+- `country(country: string)`: Returns an array of `CurrencyCodeRecord` objects used in the given country.
+- `number(number: number | string)`: Returns a `CurrencyCodeRecord` object based on ISO 4217 currency number. Returns `undefined` if not found.
+- `codes()`: Returns an array of ISO 4217 currency codes.
+- `numbers()`: Returns an array of ISO 4217 currency numbers.
+- `countries()`: Returns an array of country names.
 
-console.log(cc.publishDate);
+## Properties
+- `data`: Returns a `CurrencyCodeRecord[]` array containing all the available currency records.
+- `publishDate`: Returns the ISO formatted date the currencies were last updated.
 
-/*
-2018-08-29
-*/
+## Types
+
+- `CurrencyCodeRecord`: Defines the object returned on currency lookup. Includes properties like `currency`, `code`, `countries`, and `digits`.
+
+```typescript
+interface CurrencyCodeRecord {
+  code: CurrencyCode;
+  number: string;
+  digits: number;
+  currency: string;
+  countries: Country[];
+}
 ```
 
-## ISO-4217
+- `CurrencyCode`: The three-letter ISO 4217 code representing a currency (e.g., USD, EUR).
 
-Fetch the latest copy of ISO-4217 from the [maintainer](https://www.currency-iso.org/) and update this library's currency data file.
-
-```bash
-$ npm run iso
-
-> currency-codes@1.5.1 iso currency-codes
-> npm run iso:fetch-xml && npm run iso:ingest-xml
-
-
-> currency-codes@1.5.1 iso:fetch-xml currency-codes
-> node scripts/fetch-iso-4217-xml.js
-
-Downloaded https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml to iso-4217-list-one.xml
-
-> currency-codes@1.5.1 iso:ingest-xml currency-codes
-> node scripts/ingest-iso-4217-xml.js
-
-Ingested iso-4217-list-one.xml into data.js
-Wrote publish date to iso-4217-publish-date.js
+```typescript
+type CurrencyCode = "AED" | "AFN" | "ALL" | "AMD" | "[...]" | "ZMW" | "ZWL";
 ```
 
-Note: You may have to manually tweak the capitalization of some country's names.
+- `Country`: A string representing the name of a country.
 
-# License
+```typescript
+type Country = "United Arab Emirates (The)" | "Afghanistan" | "Albania" | "Armenia" | "[...]" | "Zambia" | "Zimbabwe";
+```
+
+## Contributing
+
+You can update the package with the latest currency data by running 
+```bash 
+npm run iso
+```
+This will update the `data.ts` and `types.ts` file based on the ingested data.
+
+To build simply run `tsc`. This will create a build in the `dist/` folder.
+
+For contributions feel free to raise issues and pull requests.
+
+## License
 
 MIT

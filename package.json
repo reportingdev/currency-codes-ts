@@ -1,9 +1,49 @@
 {
-  "name": "@reportingdev/currency-codes",
+  "name": "currency-codes-ts",
+  "version": "3.0.0",
+  "description": "A TypeScript library for ISO 4217 currency codes. Efficiently lookup and validate currency codes, retrieve associated countries, and more.",
+  "type": "module",
+
+  "main": "dist/index.js",
   "types": "index.d.ts",
-  "version": "2.1.0",
-  "description": "Lookup currency codes based on ISO 4217 with TypeScript support.",
-  "repository": "git://github.com/reporting-dev/currency-codes.git",
+  "repository": "git://github.com/reportingdev/currency-codes-ts.git",
+  "homepage": "https://github.com/reportingdev/currency-codes-ts#readme",
+  "bugs": {
+    "url": "https://github.com/reportingdev/currency-codes-ts/issues"
+  },
+
+  "author": "Braden Ericson <developers@reporting.dev>",
+
+  "dependencies": {
+    "lodash-es": "^4.17.21"
+  },
+  "devDependencies": {
+    "@gouch/to-title-case": "^2.2.1",
+    "@types/lodash-es": "^4.17.9",
+    "assert": "^2.1.0",
+    "axios": "^0.19.2",
+    "xml2js": "^0.4.23"
+  },
+
+  "scripts": {
+    "test": "node test.mjs",
+    "iso:fetch-xml": "node scripts/fetch-iso-4217-xml.cjs",
+    "iso:ingest-xml": "node scripts/ingest-iso-4217-xml.cjs",
+    "iso": "npm run iso:fetch-xml && npm run iso:ingest-xml"
+  },
+
+  "engines": {
+    "node": ">=14"
+  },
+
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE"
+  ],
+  "private": false,
+  "license": "MIT",
+
   "keywords": [
     "iso4217",
     "iso",
@@ -12,22 +52,27 @@
     "currencies",
     "code",
     "codes",
-    "lookup"
-  ],
-  "dependencies": {
-    "first-match": "~0.0.1",
-    "nub": "~0.0.0"
-  },
-  "devDependencies": {
-    "@gouch/to-title-case": "^2.2.1",
-    "axios": "^0.19.2",
-    "xml2js": "^0.4.23"
-  },
-  "scripts": {
-    "test": "node test.js",
-    "iso:fetch-xml": "node scripts/fetch-iso-4217-xml.js",
-    "iso:ingest-xml": "node scripts/ingest-iso-4217-xml.js",
-    "iso": "npm run iso:fetch-xml && npm run iso:ingest-xml"
-  },
-  "license": "MIT"
+    "lookup",
+    "finance",
+    "exchange",
+    "conversion",
+    "money",
+    "country",
+    "international",
+    "banking",
+    "rate",
+    "data",
+    "financial",
+    "fintech",
+    "payment",
+    "symbol",
+    "json",
+    "api",
+    "utils",
+    "utility",
+    "global",
+    "localization",
+    "i18n",
+    "typescript"
+  ]
 }
