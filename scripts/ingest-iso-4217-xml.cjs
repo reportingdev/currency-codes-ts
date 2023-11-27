@@ -66,13 +66,6 @@ async function processFile(name) {
   };
 }
 
-function failOnError(err) {
-  if (err) {
-    console.error(err);
-    process.exit(1);
-  }
-}
-
 function generatePreamble(publishDate) {
   return (
     "/*\n" +
