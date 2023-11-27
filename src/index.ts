@@ -1,8 +1,20 @@
+import { find, uniq, flatten } from "lodash-es";
+import data from "./data.js";
+import dataHistorical from "./data-historical.js";
+import publishDate from "./iso-4217-publish-date.js";
+import { CurrencyCode, CurrencyCodeRecord } from "./types";
 
-import { find, uniq, flatten } from 'lodash-es';
-import data from './data.js';
-import publishDate from './iso-4217-publish-date.js';
-import { CurrencyCode, CurrencyCodeRecord } from './types';
+export type CurrencyOptions = {
+  historical?: boolean;
+};
+
+const resolveRecords = ({ historical = false }: CurrencyOptions = {}) => {
+  if (historical) {
+    return [...data, ...dataHistorical];
+  } else {
+    return data;
+  }
+};
 
 /**
  * Retrieve the currency details by its ISO 4217 code.
@@ -10,9 +22,14 @@ import { CurrencyCode, CurrencyCodeRecord } from './types';
  * @param {string} code - The ISO 4217 code of the currency.
  * @returns {CurrencyCodeRecord | undefined} - The record of the currency if found, otherwise undefined.
  */
-export const code = (code: string): CurrencyCodeRecord | undefined => {
+export const code = (
+  code: string,
+  options?: CurrencyOptions
+): CurrencyCodeRecord | undefined => {
   code = code.toUpperCase();
-  return find(data, c => c.code === code);
+  const records = resolveRecords(options);
+
+  return find(records, (c) => c.code === code);
 };
 
 /**
@@ -21,11 +38,16 @@ export const code = (code: string): CurrencyCodeRecord | undefined => {
  * @param {string} country - The name of the country.
  * @returns {CurrencyCodeRecord[]} - An array of currency records that match the country name.
  */
-export const country = (country: string): CurrencyCodeRecord[] => {
+export const country = (
+  country: string,
+  options?: CurrencyOptions
+): CurrencyCodeRecord[] => {
   const lowerCountry = country.toLowerCase();
-  return data.filter(({ countries }) => {
+  const records = resolveRecords(options);
+
+  return records.filter(({ countries }) => {
     if (!countries) return false;
-    return countries.some(c => c.toLowerCase() === lowerCountry);
+    return countries.some((c) => c.toLowerCase() === lowerCountry);
   });
 };
 
@@ -35,8 +57,13 @@ export const country = (country: string): CurrencyCodeRecord[] => {
  * @param {number|string} number - The ISO 4217 number of the currency.
  * @returns {CurrencyCodeRecord | undefined} - The record of the currency if found, otherwise undefined.
  */
-export const number = (number: number | string): CurrencyCodeRecord | undefined => {
-  return find(data, c => c.number === String(number));
+export const number = (
+  number: number | string,
+  options?: CurrencyOptions
+): CurrencyCodeRecord | undefined => {
+  const records = resolveRecords(options);
+
+  return find(records, (c) => c.number === String(number));
 };
 
 /**
@@ -44,17 +71,23 @@ export const number = (number: number | string): CurrencyCodeRecord | undefined 
  *
  * @returns {CurrencyCode[]} - An array of ISO 4217 currency codes.
  */
-export const codes = (): CurrencyCode[] => data.map(({ code }) => code);
+export const codes = (options?: CurrencyOptions): CurrencyCode[] => {
+  const records = resolveRecords(options);
+
+  return records.map(({ code }) => code);
+};
 
 /**
  * Get a list of all ISO 4217 currency numbers.
  *
  * @returns {string[]} - An array of ISO 4217 currency numbers.
  */
-export const numbers = (): string[] => {
-  return data
-    .map(c => c.number)
-    .filter(n => n !== undefined && n !== null);
+export const numbers = (options?: CurrencyOptions): string[] => {
+  const records = resolveRecords(options);
+
+  return records
+    .map((c) => c.number)
+    .filter((n) => n !== undefined && n !== null) as string[];
 };
 
 /**
@@ -62,13 +95,14 @@ export const numbers = (): string[] => {
  *
  * @returns {string[]} - An array of country names.
  */
-export const countries = (): string[] => {
-  const countryArrays = data
+export const countries = (options?: CurrencyOptions): string[] => {
+  const records = resolveRecords(options);
+
+  const countryArrays = records
     .filter((c: CurrencyCodeRecord) => c.countries)
     .map((c: CurrencyCodeRecord) => c.countries);
   return uniq(flatten(countryArrays));
 };
-
 
 export default {
   code,
@@ -78,5 +112,6 @@ export default {
   numbers,
   countries,
   publishDate,
-  data
+  data,
+  dataHistorical,
 };
