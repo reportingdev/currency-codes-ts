@@ -1,4 +1,4 @@
-import cc from "./dist/index.js";
+import cc from "./dist/mjs/index.js";
 import assert from "assert";
 
 // default export

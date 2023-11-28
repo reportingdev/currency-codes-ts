@@ -1,41 +1,43 @@
 {
   "name": "currency-codes-ts",
-  "version": "3.0.0",
+  "version": "3.1.6",
   "description": "A TypeScript library for ISO 4217 currency codes. Efficiently lookup and validate currency codes, retrieve associated countries, and more.",
   "type": "module",
-
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/mjs/index.js",
+  "types": "dist/cjs/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/mjs/index.js"
+    }
+  },
   "repository": "git://github.com/reportingdev/currency-codes-ts.git",
   "homepage": "https://github.com/reportingdev/currency-codes-ts#readme",
   "bugs": {
     "url": "https://github.com/reportingdev/currency-codes-ts/issues"
   },
-
   "author": "Braden Ericson <developers@reporting.dev>",
-
   "dependencies": {
-    "lodash-es": "^4.17.21"
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@gouch/to-title-case": "^2.2.1",
-    "@types/lodash-es": "^4.17.9",
+    "@types/lodash": "^4.14.202",
     "assert": "^2.1.0",
     "axios": "^0.19.2",
     "xml2js": "^0.4.23"
   },
-
   "scripts": {
     "test": "node test.mjs",
     "iso:fetch-xml": "node scripts/fetch-iso-4217-xml.cjs",
     "iso:ingest-xml": "node scripts/ingest-iso-4217-xml.cjs",
-    "iso": "npm run iso:fetch-xml && npm run iso:ingest-xml"
+    "iso": "npm run iso:fetch-xml && npm run iso:ingest-xml",
+    "build": "rm -fr dist/* && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json && ./fixup.sh"
   },
-
   "engines": {
     "node": ">=14"
   },
-
   "files": [
     "dist/",
     "README.md",
@@ -43,7 +45,6 @@
   ],
   "private": false,
   "license": "MIT",
-
   "keywords": [
     "iso4217",
     "iso",

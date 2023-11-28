@@ -1,4 +1,4 @@
-import { find, uniq, flatten } from "lodash-es";
+import _ from "lodash";
 import data from "./data.js";
 import dataHistorical from "./data-historical.js";
 import publishDate from "./iso-4217-publish-date.js";
@@ -29,7 +29,7 @@ export const code = (
   code = code.toUpperCase();
   const records = resolveRecords(options);
 
-  return find(records, (c) => c.code === code);
+  return _.find(records, (c) => c.code === code);
 };
 
 /**
@@ -63,7 +63,7 @@ export const number = (
 ): CurrencyCodeRecord | undefined => {
   const records = resolveRecords(options);
 
-  return find(records, (c) => c.number === String(number));
+  return _.find(records, (c) => c.number === String(number));
 };
 
 /**
@@ -101,7 +101,7 @@ export const countries = (options?: CurrencyOptions): string[] => {
   const countryArrays = records
     .filter((c: CurrencyCodeRecord) => c.countries)
     .map((c: CurrencyCodeRecord) => c.countries);
-  return uniq(flatten(countryArrays));
+  return _.uniq(_.flatten(countryArrays));
 };
 
 export default {
