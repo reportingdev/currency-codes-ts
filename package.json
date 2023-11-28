@@ -1,6 +1,6 @@
 {
-  "name": "currency-codes-ts",
-  "version": "3.0.0",
+  "name": "@holm/currency-codes-ts",
+  "version": "3.1.6",
   "description": "A TypeScript library for ISO 4217 currency codes. Efficiently lookup and validate currency codes, retrieve associated countries, and more.",
   "type": "module",
 
